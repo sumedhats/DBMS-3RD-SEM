@@ -1,262 +1,285 @@
--- Lab Experiment 01: Implementation of DDL Commands in SQL for the given scenarios
--- STUDENT NAME: Sumedha t s
--- USN: 1rua24bca0085
--- SECTION: bca(hons)
+-- -----------------------------------------------------------------------------------------------------------------------------------------
+-- Lab Experiment 03: Implementation of different types of SQL functions.
 
+-- -----------------------------------------------------------------------------------------------------------------------------------------
+-- STUDENT NAME: SUMEDHA T S
+-- USN: 1RUA24BCA0085
+-- SECTION: BCA(HONS)
+-- -----------------------------------------------------------------------------------------------------------------------------------------
 SELECT USER(), 
        @@hostname AS Host_Name, 
        VERSION() AS MySQL_Version, 
        NOW() AS Current_Date_Time;
--- OUTPUT : [ COPYPASTE OF THE OUTPUT in CSV Format and terminate with ; ]
-/*05:53:35	SELECT USER(),         
-@@hostname AS Host_Name,
-VERSION() AS MySQL_Version,
-NOW() AS Current_Date_Time LIMIT 0, 1000
-1 row(s) returned	0.000 sec / 0.000 sec*/
 
--- Scenario: College Student Management System
-
--- CREATE AND LOAD THE database
--- Write your SQL query below Codespace:
--- Task 1: Create the Tables under this system (min 5 tables)
-  -- Table 01: Departments ( DepartmentID, DepartmentName, HOD,ContactEmail,PhoneNumber,Location )
-  -- Table 02: Course (CourseID, CourseName,Credits,DepartmentID,Duration,Fee )
-  -- Table 03: Students (StudentID,FirstName,LastName,Email,DateOfBirth,CourseID)
-  -- Table 04: Faculty FacultyID,FacultyName,DepartmentID,Qualification,Email,PhoneNumber)
-  -- Table 05: Enrollments (  EnrollmentID,StudentID,CourseID,Semester,Year,Grade)
--- Specify the Key (Primary and Foreign) for each table while creating
+-- Paste the Output below by execution of above command
+/*05:58:17	SELECT USER(),     
+ VERSION() AS MySQL_Version,        
+ NOW() AS Current_Date_Time LIMIT 0, 1000	
+ 1 row(s) returned	0.000 sec / 0.000 sec*/
 
 
--- Write your SQL query below Codespace:
-create database collagestudentmanagementsystem;
-use collagestudentmanagementsystem;
-create table department
-(departmentid int primary key,
- departmentname varchar(23),
- hod varchar(12),
- contactemail varchar(40),
- phonenumber int,
- location varchar(45));
- desc department;
- create table course
-(courseid int primary key,
- coursename varchar(23),
- credits int,
- duration int,
- departmentid int  ,
- fee int );
- desc course;
- create table student
-(studentid int primary key,
- firstname varchar(23),
- lastname varchar(12),
- email varchar(40),
- dateofbirth int,
- courseid int);
- desc student;
- create table faculty
-(facultyid int primary key,
- facultyname varchar(23),
- departmentid int,
- email varchar(40),
- qualification varchar(15),
- phonenumber int);
- desc faculty;
-  create table enrollment
-(enrollmentid int primary key,
- courseid varchar(23),
- studentid int,
- semester varchar(40),
- grade varchar(15),
- yrs int);
- desc enrollment;
--- [ COPYPASTE OF THE OUTPUT in CSV Format and terminate with ; ]
--- OUTPUT : Disclaimer - This code is not the part of the SQL Code
-/*06:16:15	create table department (departmentid int primary key,  departmentname varchar(23),  hod varchar(12),  contactemail varchar(40),  phonenumber int,  location varchar(45))	0 row(s) affected	0.016 sec*/
-/*06:17:34	create table course (courseid int primary key,  coursename varchar(23),  credits int,  duration int,  departmentid int  ,  fee int )	0 row(s) affected	0.016 sec*/
-/*06:18:39	create table student (studentid int primary key,  firstname varchar(23),  lastname varchar(12),  email varchar(40),  dateofbirth int,  courseid int)	0 row(s) affected	0.016 sec*/
---  describe the structure of each table and copy paste the Output 
-/*'departmentid', 'int', 'NO', 'PRI', NULL, ''
-'departmentname', 'varchar(23)', 'YES', '', NULL, ''
-'hod', 'varchar(12)', 'YES', '', NULL, ''
-'contactemail', 'varchar(40)', 'YES', '', NULL, ''
-'phonenumber', 'int', 'YES', '', NULL, ''
-'location', 'varchar(45)', 'YES', '', NULL, ''*/
-/*'courseid', 'int', 'NO', 'PRI', NULL, ''
-'coursename', 'varchar(23)', 'YES', '', NULL, ''
-'credits', 'int', 'YES', '', NULL, ''
-'duration', 'int', 'YES', '', NULL, ''
-'departmentid', 'int', 'YES', '', NULL, ''
-'fee', 'int', 'YES', '', NULL, ''*/
-/*'studentid', 'int', 'NO', 'PRI', NULL, ''
-'firstname', 'varchar(23)', 'YES', '', NULL, ''
-'lastname', 'varchar(12)', 'YES', '', NULL, ''
-'email', 'varchar(40)', 'YES', '', NULL, ''
-'dateofbirth', 'int', 'YES', '', NULL, ''
-'courseid', 'int', 'YES', '', NULL, ''*/
-/*'facultyid', 'int', 'NO', 'PRI', NULL, ''
-'facultyname', 'varchar(23)', 'YES', '', NULL, ''
-'departmentid', 'int', 'YES', '', NULL, ''
-'email', 'varchar(40)', 'YES', '', NULL, ''
-'qualification', 'varchar(15)', 'YES', '', NULL, ''
-'phonenumber', 'int', 'YES', '', NULL, ''*/
-/*'enrollmentid', 'int', 'NO', 'PRI', NULL, ''
-'courseid', 'varchar(23)', 'YES', '', NULL, ''
-'studentid', 'int', 'YES', '', NULL, ''
-'semester', 'varchar(40)', 'YES', '', NULL, ''
-'grade', 'varchar(15)', 'YES', '', NULL, ''
-'yrs', 'int', 'YES', '', NULL, ''*/
--- Perform the following operations on the each of the tables
--- 01: add 2 new columns for each table
-   alter table department
-     add (faculty varchar(23), student varchar(21));
-     alter table course
-     add (faculty varchar(23), student varchar(21));
-     alter table student
-     add (department varchar(23), coursename varchar(21));
-     alter table faculty
-     add (noofstudents int, subject varchar(23));
-     alter table enrollment
-     add (faculty varchar(23), course varchar(21));
--- 02: Modify the existing column from each table
-      alter table department
-     modify column faculty varchar(26);
-     alter table course
-     modify column faculty varchar(27);
-     alter table student
-     modify column department varchar(28);
-     alter table faculty
-     modify column subject varchar(28);
-     alter table enrollment
-     modify column faculty varchar(28);
--- 03 change the datatypes
-alter table department
-     modify column faculty varchar(26);
-     alter table course
-     modify column faculty varchar(27);
-     alter table student
-     modify column departmentid varchar(28);
-     alter table faculty
-     modify column subject varchar(28);
-     alter table enrollment
-     modify column faculty varchar(28);
--- 04: Rename a column
-alter table student
- rename column firstname to fname;
--- 05: Drop a column
-alter table department
-  drop hod;
--- 06: Rename the table
-alter table faculty
- rename to facultydetails;
--- 07: describe the structure of the new table
-/**/
-desc facultydetails;
-/*facultyid', 'int', 'NO', 'PRI', NULL, ''
-'facultyname', 'varchar(23)', 'YES', '', NULL, ''
-'departmentid', 'int', 'YES', '', NULL, ''
-'email', 'varchar(40)', 'YES', '', NULL, ''
-'qualification', 'varchar(15)', 'YES', '', NULL, ''
-'phonenumber', 'int', 'YES', '', NULL, ''
-'noofstudents', 'int', 'YES', '', NULL, ''
-'subject', 'varchar(28)', 'YES', '', NULL, ''
+-- -----------------------------------------------------------------------------------------------------------------------------------------
+-- PreCoded Relational Schema and Instance.
+-- -----------------------------------------------------------------------------------------------------------------------------------------
+-- 1. create a table named Employee with EmpID ,FirstName,LastName Salary BirthDate HireDate 
+create database company;
+/*06:23:51	create database company	1 row(s) affected	0.000 sec
 */
-desc department;
-/*departmentid', 'int', 'NO', 'PRI', NULL, ''
-'departmentname', 'varchar(23)', 'YES', '', NULL, ''
-'contactemail', 'varchar(40)', 'YES', '', NULL, ''
-'phonenumber', 'int', 'YES', '', NULL, ''
-'location', 'varchar(45)', 'YES', '', NULL, ''
-'faculty', 'varchar(26)', 'YES', '', NULL, ''
-'student', 'varchar(21)', 'YES', '', NULL, ''
+use company;
+/*06:23:55	use company	0 row(s) affected	0.000 sec
+*/
+create table employee
+( empID int primary key,
+  firstname varchar(18),
+  lastname varchar(18),
+  salary int,
+  birthdate date,
+  hiredate date);
+  /*06:24:00	create table employee ( empID int,   firstname varchar(18),   lastname varchar(18),   salary int,   birthdate date,   hiredate date)	0 row(s) affected	0.015 sec
+*/
+  desc employee;
+  /*'empID', 'int', 'NO', 'PRI', NULL, ''
+'firstname', 'varchar(18)', 'YES', '', NULL, ''
+'lastname', 'varchar(18)', 'YES', '', NULL, ''
+'salary', 'int', 'YES', '', NULL, ''
+'birthdate', 'date', 'YES', '', NULL, ''
+'hiredate', 'date', 'YES', '', NULL, ''
+*/
+-- 2. Insert 10 records to employee;
+insert into employee values
+(01,"sumedha","shivkumar",10000,'2006-05-08','2025-07-06'),
+(02,"sudha","shiva",40000,'2006-06-08','2025-07-08'),
+(03,"ram","kumar",20000,'2006-05-14','2025-07-07'),
+(04,"vedha","kumari",10000,'2006-07-08','2025-08-06'),
+(05,"ravi","kumar",100000,'2006-08-07','2025-11-08'),
+(06,"radha","shivkumar",17000,'2006-08-08','2025-12-14'),
+(07,"krishna","kumar",670000,'2006-08-08','2025-12-06'),
+(08,"jaanu","kumar",100000,'2006-05-09','2025-11-07'),
+(09,"ananya","gowda",100000,'2006-12-14','2025-07-09'),
+(10,"suvi","gowda",700000,'2006-08-09','2025-07-06');
+/*06:24:07	insert into employee values (01,"sumedha","shivkumar",10000,'2006-05-08','2025-07-06'), (02,"sudha","shiva",40000,'2006-06-08','2025-07-08'), (03,"ram","kumar",20000,'2006-05-14','2025-07-07'), (04,"vedha","kumari",10000,'2006-07-08','2025-08-06'), (05,"ravi","kumar",100000,'2006-08-07','2025-11-08'), (06,"radha","shivkumar",17000,'2006-08-08','2025-12-14'), (07,"krishna","kumar",670000,'2006-08-08','2025-12-06'), (08,"jaanu","kumar",100000,'2006-05-09','2025-11-07'), (09,"ananya","gowda",100000,'2006-12-14','2025-07-09'), (10,"suvi","gowda",700000,'2006-08-09','2025-07-06')	10 row(s) affected Records: 10  Duplicates: 0  Warnings: 0	0.016 sec
+*/
+-- 3. create a table named Orders with OrderID , OrderDate, totalAmount, EmpID(foreign key)  
+create table orders
+( orderid int primary key,
+  orderdate date,
+  totalamount int,
+  empID int,
+  foreign key (empID) references employee(empID));
+  /*06:36:52	create table orders ( orderid int primary key,   orderdate date,   totalamount int,   empID int,   foreign key (empID) references employee(empID))	0 row(s) affected	0.016 sec
+*/
+desc orders;
+/*'orderid', 'int', 'NO', 'PRI', NULL, ''
+'orderdate', 'date', 'YES', '', NULL, ''
+'totalamount', 'int', 'YES', '', NULL, ''
+'empID', 'int', 'YES', 'MUL', NULL, ''
+*/
+-- 4. Insert 10 records to Orders
+insert into orders values
+(01,'2025-05-06',2345,01),
+(02,'2025-07-06',2340,02),
+(03,'2025-05-09',2300,03),
+(05,'2025-08-06',2305,04),
+(08,'2025-07-06',7845,07),
+(09,'2025-08-06',2345,09),
+(11,'2025-09-06',2005,06),
+(06,'2025-11-06',2000,08),
+(12,'2025-12-06',9045,05),
+(15,'2025-05-06',1492,10);
+/*06:38:51	insert into orders values (01,'2025-05-06',2345,01), (02,'2025-07-06',2340,02), (03,'2025-05-09',2300,03), (05,'2025-08-06',2305,04), (08,'2025-07-06',7845,07), (09,'2025-08-06',2345,09), (11,'2025-09-06',2005,06), (06,'2025-11-06',2000,08), (12,'2025-12-06',9045,05), (15,'2025-05-06',1492,10)	10 row(s) affected Records: 10  Duplicates: 0  Warnings: 0	0.015 sec
 */
 
-/*'enrollmentid', 'int', 'NO', 'PRI', NULL, ''
-'courseid', 'varchar(23)', 'YES', '', NULL, ''
-'studentid', 'int', 'YES', '', NULL, ''
-'semester', 'varchar(40)', 'YES', '', NULL, ''
-'grade', 'varchar(15)', 'YES', '', NULL, ''
-'yrs', 'int', 'YES', '', NULL, ''
-'faculty', 'varchar(28)', 'YES', '', NULL, ''
-'course', 'varchar(21)', 'YES', '', NULL, ''*/
-
-desc course;
-/* 'courseid', 'int', 'NO', 'PRI', NULL, ''
-'coursename', 'varchar(23)', 'YES', '', NULL, ''
-'credits', 'int', 'YES', '', NULL, ''
-'duration', 'int', 'YES', '', NULL, ''
-'departmentid', 'int', 'YES', '', NULL, ''
-'fee', 'int', 'YES', '', NULL, ''
-'faculty', 'varchar(27)', 'YES', '', NULL, ''
-'student', 'varchar(21)', 'YES', '', NULL, ''*/
-
-
--- 1. Add a new column Address (VARCHAR(100)) to the Students table
-ALTER TABLE Student
-ADD Address VARCHAR(100);
-
--- 2. Add a column Gender (CHAR(1)) to the Students table
-ALTER TABLE Student
-ADD Gender CHAR(1);
-
--- 3. Add a column JoiningDate (DATE) to the Faculty table
-ALTER TABLE Faculty
-ADD JoiningDate DATE;
-
--- 4. Modify the column CourseName in the Courses table to increase its size from VARCHAR(50) to VARCHAR(100)
-ALTER TABLE Course
-MODIFY CourseName VARCHAR(100);
-
--- 5. Modify the column Location in the Departments table to VARCHAR(80)
-ALTER TABLE Department
-MODIFY Location VARCHAR(80);
-
--- 6. Rename the column Qualification in the Faculty table to Degree
-ALTER TABLE Facultydetails
-RENAME COLUMN Qualification TO Degree;
-
--- 7. Rename the table Faculty to Teachers
-ALTER TABLE Facultydetails
-RENAME TO Teachers;
-
--- 8. Drop the column PhoneNumber from the Departments table
-ALTER TABLE Department
-DROP COLUMN PhoneNumber;
-
--- 9. Drop the column Email from the Students table
-ALTER TABLE Student
-DROP COLUMN Email;
-
--- 10. Drop the column Duration from the Courses table
-ALTER TABLE Course
-DROP COLUMN Duration;
-
-
--- Show tables before dropping
-SHOW TABLES;
-/* 'course'
-'department'
-'enrollment'
-'student'
-'teachers'
+-- -----------------------------------------------------------------------------------------------------------------------------------------
+-- Print the Information of the Employee and Order Table. [ Hint: SELECT * FROM TABLENAME ]
+select * from employee;
+select * from orders;
+-- Write the SQL Query below this line.
+-- Output: 
+/*'1', 'sumedha', 'shivkumar', '10000', '2006-05-08', '2025-07-06'
+'2', 'sudha', 'shiva', '40000', '2006-06-08', '2025-07-08'
+'3', 'ram', 'kumar', '20000', '2006-05-14', '2025-07-07'
+'4', 'vedha', 'kumari', '10000', '2006-07-08', '2025-08-06'
+'5', 'ravi', 'kumar', '100000', '2006-08-07', '2025-11-08'
+'6', 'radha', 'shivkumar', '17000', '2006-08-08', '2025-12-14'
+'7', 'krishna', 'kumar', '670000', '2006-08-08', '2025-12-06'
+'8', 'jaanu', 'kumar', '100000', '2006-05-09', '2025-11-07'
+'9', 'ananya', 'gowda', '100000', '2006-12-14', '2025-07-09'
+'10', 'suvi', 'gowda', '700000', '2006-08-09', '2025-07-06'
+*/
+/*'1', '2025-05-06', '2345', '1'
+'2', '2025-07-06', '2340', '2'
+'3', '2025-05-09', '2300', '3'
+'5', '2025-08-06', '2305', '4'
+'6', '2025-11-06', '2000', '8'
+'8', '2025-07-06', '7845', '7'
+'9', '2025-08-06', '2345', '9'
+'11', '2025-09-06', '2005', '6'
+'12', '2025-12-06', '9045', '5'
+'15', '2025-05-06', '1492', '10'
+*/
+-- -----------------------------------------------------------------------------------------------------------------------------------------
+-- Number Functions Section
+-- ------------------------------------------------------------
+/* a. Round Salaries: Round employee salaries to nearest integer */
+select round(salary)
+from employee;
+-- Output: 
+/*'10000'
+'40000'
+'20000'
+'10000'
+'100000'
+'17000'
+'670000'
+'100000'
+'100000'
+'700000'
+*?
+/* b. Absolute Values: Show absolute values of salaries */
+select abs(salary)
+from employee;
+-- Output: 
+/*'10000'
+'40000'
+'20000'
+'10000'
+'100000'
+'17000'
+'670000'
+'100000'
+'100000'
+'700000'
 */
 
--- Drop the 'Courses' table
-DROP TABLE IF EXISTS Course;
-/*07:04:01	DROP TABLE IF EXISTS Course	0 row(s) affected	0.000 sec*/
+/* c. Ceiling Values: Get ceiling values of order amounts */
+select ceil(totalamount)
+from orders;
+-- Output: 
+/*'2345'
+'2340'
+'2300'
+'2305'
+'2000'
+'7845'
+'2345'
+'2005'
+'9045'
+'1492'
+*?
+-- ------------------------------------------------------------
+-- Aggregate Functions Section
+-- ------------------------------------------------------------
+/* a. Count of Employees: Find total number of employees */
+select count(*)
+from employee;
+-- Output: 
+/*'10'*/
 
--- Drop the 'Enrollments' table
-DROP TABLE IF EXISTS Enrollment;
-/*07:04:16	DROP TABLE IF EXISTS Enrollment	0 row(s) affected	0.000 se*/
+/* b. Sum of Salaries: Calculate total salary expense */
+select sum(salary)
+from employee;
+-- Output: 
+/*'1767000'
+*?
 
--- Show tables after dropping
-SHOW TABLES;
-/*'department'
-'student'
-'teachers'
- */
+/* c. Average Order Amount: Find average order value */
+select avg(totalamount)
+from orders;
+-- Output: 
+/*'3402.2000'
+*/
 
+/* d. Max/Min Salary: Find highest and lowest salaries */
+select max(salary), min(salary)
+from employee;
+-- Output: 
+/*'700000', '10000'
+*/
+-- ------------------------------------------------------------
+-- Character Functions Section
+-- ------------------------------------------------------------
+/* a. Case Conversion: Show names in uppercase and lowercase */
+select upper(firstname),lower(firstname)
+from employee;
+-- Output: 
+/*'SUMEDHA', 'sumedha'
+'SUDHA', 'sudha'
+'RAM', 'ram'
+'VEDHA', 'vedha'
+'RAVI', 'ravi'
+'RADHA', 'radha'
+'KRISHNA', 'krishna'
+'JAANU', 'jaanu'
+'ANANYA', 'ananya'
+'SUVI', 'suvi'
+*/
+select upper(lastname),lower(lastname)
+from employee;
+/*'SHIVKUMAR', 'shivkumar'
+'SHIVA', 'shiva'
+'KUMAR', 'kumar'
+'KUMARI', 'kumari'
+'KUMAR', 'kumar'
+'SHIVKUMAR', 'shivkumar'
+'KUMAR', 'kumar'
+'KUMAR', 'kumar'
+'GOWDA', 'gowda'
+'GOWDA', 'gowda'
+*/
 
--- Note: Perform the specified operations on all the 5 tables in the system
--- End of Lab Experiment 01
--- Upload the Completed worksheet in the google classroom with file name USN _ LabScenario01
+/* b. Concatenate Names: Create full names */
+select concat(firstname,lastname)
+from employee;
+-- Output: 
+/*'sumedhashivkumar'
+'sudhashiva'
+'ramkumar'
+'vedhakumari'
+'ravikumar'
+'radhashivkumar'
+'krishnakumar'
+'jaanukumar'
+'ananyagowda'
+'suvigowda'
+*/
+/* c. Extract Substring: Get first 3 characters of first names */
+select substring(firstname,1,3)
+from employee;
+-- Output: 
+/*'sum'
+'sud'
+'ram'
+'ved'
+'rav'
+'rad'
+'kri'
+'jaa'
+'ana'
+'suv'
+*/
+-- ------------------------------------------------------------
+-- Conversion Functions Section
+-- ------------------------------------------------------------
+/* Convert String to Date: Convert text to DATE type */
+
+-- Output: 
+
+-- ------------------------------------------------------------
+-- Date Functions Section
+-- ------------------------------------------------------------
+/* a. Current Date/Time: Get current timestamp */
+
+-- Output: 
+
+/* b. Extract Year: Get year from order dates */
+
+-- Output: 
+
+/* c. Add Months: Add 3 months to order dates */
+
+-- Output: 
+
+/* d. Days Since Order: Calculate days between order date and now */
+-- Output: 
+
+-- END of the Task -- 
