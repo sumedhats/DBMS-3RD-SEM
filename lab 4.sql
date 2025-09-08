@@ -261,25 +261,71 @@ from employee;
 -- Conversion Functions Section
 -- ------------------------------------------------------------
 /* Convert String to Date: Convert text to DATE type */
-
+select cast(orderdate as char) as converteddate
+from orders;
 -- Output: 
-
+/*'2025-05-06'
+'2025-07-06'
+'2025-05-09'
+'2025-08-06'
+'2025-11-06'
+'2025-07-06'
+'2025-08-06'
+'2025-09-06'
+'2025-12-06'
+'2025-05-06'
+*/
 -- ------------------------------------------------------------
 -- Date Functions Section
 -- ------------------------------------------------------------
 /* a. Current Date/Time: Get current timestamp */
-
+select now() as correct_timestamp;
 -- Output: 
-
+/*'2025-09-08 07:20:40'
+*/
 /* b. Extract Year: Get year from order dates */
-
+select orderdate,year(orderdate) as order_year
+from orders;
 -- Output: 
-
+/*'2025-05-06', 2025
+'2025-07-06', 2025
+'2025-05-09', 2025
+'2025-08-06', 2025
+'2025-11-06', 2025
+'2025-07-06', 2025
+'2025-08-06', 2025
+'2025-09-06', 2025
+'2025-12-06', 2025
+'2025-05-06', 2025
+*/
 /* c. Add Months: Add 3 months to order dates */
-
+select orderdate,date_add(orderdate, INTERVAL 3 MONTH) as "newdate"
+from orders;
 -- Output: 
-
+/*'2025-05-06', '2025-08-06'
+'2025-07-06', '2025-10-06'
+'2025-05-09', '2025-08-09'
+'2025-08-06', '2025-11-06'
+'2025-11-06', '2026-02-06'
+'2025-07-06', '2025-10-06'
+'2025-08-06', '2025-11-06'
+'2025-09-06', '2025-12-06'
+'2025-12-06', '2026-03-06'
+'2025-05-06', '2025-08-06'
+*/
 /* d. Days Since Order: Calculate days between order date and now */
+select orderdate, datediff(now(),orderdate) as days_since_order
+from orders;
 -- Output: 
-
+/*'2025-05-06', '125'
+'2025-07-06', '64'
+'2025-05-09', '122'
+'2025-08-06', '33'
+'2025-11-06', '-59'
+'2025-07-06', '64'
+'2025-08-06', '33'
+'2025-09-06', '2'
+'2025-12-06', '-89'
+'2025-05-06', '125'
+*/
 -- END of the Task -- 
